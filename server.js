@@ -6,13 +6,16 @@ dotenv.config();
 const app = express();
 connectDB();
 const userRoutes = require("./routes/userRoutes");
+const { notFound, errorHandler } = require("./middleware/errorMiddleWare");
 app.use(express.json()); //to accept JSON data
 
 app.get("/", (req, res) => {
   res.send("First API call hit");
 });
 
-app.use("/api/user", userRoutes);
+app.use("/api/user", userRoutes); //this is user register route
+app.use(notFound);
+app.use(errorHandler);
 
 const port = process.env.PORT || 8888;
 
