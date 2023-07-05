@@ -7,6 +7,7 @@ const app = express();
 connectDB();
 const userRoutes = require("./routes/userRoutes");
 const chatRoutes = require("./routes/chatRoutes");
+const messageRoutes = require("./routes/messageRoutes");
 const { notFound, errorHandler } = require("./middleware/errorMiddleWare");
 app.use(express.json()); //to accept JSON data
 
@@ -16,6 +17,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/user", userRoutes); //this is user register route
 app.use("/api/chat", chatRoutes);
+app.use("/api/message", messageRoutes);
 app.use(notFound);
 app.use(errorHandler);
 
