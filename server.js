@@ -23,7 +23,17 @@ app.use(errorHandler);
 
 const port = process.env.PORT || 8888;
 
-app.listen(8888, console.log(`server started on port ${port}`));
+const server = app.listen(port, console.log(`server started on port ${port}`));
+const io = require("socket.io")(server, {
+  pingTimeout: 60000,
+  cors: {
+    origin: "http://localhost:3000",
+  },
+});
+
+io.on("connection", (socket) => {
+  console.log("connected to socket");
+});
 
 //tutorial link
 //https://www.youtube.com/watch?v=ypJqtQ3xr7M&list=PLKhlp2qtUcSZsGkxAdgnPcHioRr-4guZf&index=5
